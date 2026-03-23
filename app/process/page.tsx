@@ -187,25 +187,21 @@ function ProcessPageInner() {
           {(() => {
             const platform = savedRecipe.platform ? platformConfig[savedRecipe.platform] : null
             return (
-              <div
-                className="bg-white rounded-2xl overflow-hidden"
-                style={{ border: '1px solid #f0e4e1', boxShadow: '0 2px 8px rgba(0,0,0,0.05)' }}
-              >
-                <div className="h-1 w-full" style={{ background: 'var(--primary-coral)' }} />
-                <div className="flex items-center justify-between px-5 pt-4 pb-3">
-                  <div className="flex items-center gap-3 flex-1 min-w-0">
+              <div className="rounded-2xl p-5 text-white" style={{ background: 'var(--primary-coral)' }}>
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1 min-w-0">
                     {platform && (
                       <span
-                        className="inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full flex-shrink-0"
-                        style={{ backgroundColor: platform.bg, color: platform.color }}
+                        className="inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full border mb-3 flex-shrink-0"
+                        style={{ backgroundColor: platform.bg, color: platform.color, borderColor: platform.bg }}
                       >
                         {platform.icon}
                         {platform.label}
                       </span>
                     )}
                     <h3
-                      className="text-lg font-bold truncate"
-                      style={{ fontFamily: 'Amiri, serif', color: '#1a1a1a' }}
+                      className="text-2xl font-bold leading-tight"
+                      style={{ fontFamily: 'Amiri, serif' }}
                     >
                       {savedRecipe.recipe_name}
                     </h3>
@@ -213,10 +209,10 @@ function ProcessPageInner() {
                   <button
                     onClick={handleToggleSave}
                     disabled={savingToggle}
-                    className="w-9 h-9 rounded-full flex items-center justify-center transition-all flex-shrink-0 mr-2"
+                    className="w-10 h-10 rounded-full flex items-center justify-center transition-all flex-shrink-0"
                     style={{
-                      backgroundColor: recipeSaved ? '#fce7f3' : '#f5f5f4',
-                      color: recipeSaved ? '#e06b53' : '#a8a29e',
+                      backgroundColor: recipeSaved ? 'rgba(255,255,255,0.3)' : 'rgba(255,255,255,0.15)',
+                      color: 'white',
                     }}
                     title={recipeSaved ? 'إلغاء الحفظ' : 'حفظ الوصفة'}
                   >
@@ -236,18 +232,18 @@ function ProcessPageInner() {
             )
           })()}
 
-          {/* Side-by-side: Video (left) + Recipe (right) */}
+          {/* Side-by-side: Recipe (right in RTL) + Video (left in RTL) */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
-            {/* Left: Video Embed */}
-            <div>
-              <VideoEmbed videoUrl={savedRecipe.video_url} platform={savedRecipe.platform} />
-            </div>
-
-            {/* Right: Recipe Display */}
+            {/* Right in RTL: Recipe Display */}
             <div className="bg-white rounded-2xl shadow-sm overflow-hidden" style={{ border: '1px solid #f0e4e1' }}>
               <div className="p-6">
                 <RecipeDisplay formattedMessage={savedRecipe.formatted_message} />
               </div>
+            </div>
+
+            {/* Left in RTL: Video Embed */}
+            <div>
+              <VideoEmbed videoUrl={savedRecipe.video_url} platform={savedRecipe.platform} />
             </div>
           </div>
 
