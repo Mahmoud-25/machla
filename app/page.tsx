@@ -16,7 +16,7 @@ export default async function HomePage() {
 
   // Deduplicate by video_url — keep the most recent entry per URL
   const seen = new Set<string>()
-  const recipeList: Recipe[] = (recipes ?? [])
+  const recipeList = (recipes ?? []) as Recipe[]
     .filter((r) => {
       if (seen.has(r.video_url)) return false
       seen.add(r.video_url)
