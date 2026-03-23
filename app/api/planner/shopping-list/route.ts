@@ -26,7 +26,7 @@ export async function GET(request: NextRequest) {
   const ingredients: Array<{ name: string; amount: string | null; recipe_name: string }> = []
 
   for (const entry of entries) {
-    const recipe = entry.recipe as { recipe_name: string; formatted_message: string } | null
+    const recipe = entry.recipe as unknown as { recipe_name: string; formatted_message: string } | null
     if (!recipe?.formatted_message) continue
     const parsed = parseIngredientsFromMessage(recipe.formatted_message)
     for (const ing of parsed) {
