@@ -1,3 +1,5 @@
+export const maxDuration = 60 // seconds — tells Netlify/Vercel to allow up to 60s
+
 import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 import { NextRequest, NextResponse } from 'next/server'

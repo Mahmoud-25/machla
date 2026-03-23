@@ -142,12 +142,9 @@ export default function RecipeCard({ recipe, isSaved: initialSaved = false }: Re
 
         {/* Footer */}
         <div
-          className="flex items-center justify-between px-5 py-3 mt-4"
+          className="flex items-center justify-end px-5 py-3 mt-4"
           style={{ borderTop: '1px solid #f5f0ed' }}
         >
-          <span className="text-xs" style={{ color: '#9ca3af' }}>
-            {formatDate(recipe.created_at)}
-          </span>
           <span
             className="text-xs font-semibold flex items-center gap-1 transition-colors group-hover:underline"
             style={{ color: 'var(--primary-coral)' }}

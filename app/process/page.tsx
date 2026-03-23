@@ -1,16 +1,24 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
+import { Suspense } from 'react'
 import VideoUrlForm from '@/components/VideoUrlForm'
 import RecipeDisplay from '@/components/RecipeDisplay'
 import VideoEmbed from '@/components/VideoEmbed'
 import type { Recipe } from '@/types'
 
-export default function ProcessPage() {
+function ProcessPageInner() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [savedRecipe, setSavedRecipe] = useState<Recipe | null>(null)
+  const searchParams = useSearchParams()
+
+  useEffect(() => {
+    const url = searchParams.get('url')
+    if (url) handleSubmit(url)
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleSubmit = async (url: string) => {
     setLoading(true)
@@ -154,5 +162,13 @@ export default function ProcessPage() {
         </div>
       )}
     </div>
+  )
+}
+
+export default function ProcessPage() {
+  return (
+    <Suspense>
+      <ProcessPageInner />
+    </Suspense>
   )
 }

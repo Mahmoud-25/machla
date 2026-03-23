@@ -376,7 +376,7 @@ function PlannerPage() {
           <h1 className="text-2xl font-bold" style={{ fontFamily: 'Amiri, serif', color: '#1a1a1a' }}>
             📅 مخطط الوجبات الأسبوعي
           </h1>
-          <p className="text-sm text-gray-500 mt-0.5">نظّم وجباتك للأسبوع مسبقاً</p>
+          <p className="text-sm text-gray-500 mt-0.5">نظّم وجباتك، احصل علي قائمة بالمكونات الأسبوعية بكل سهولة.</p>
         </div>
 
         <div className="flex items-center gap-2 flex-wrap">
@@ -394,21 +394,6 @@ function PlannerPage() {
             {sharing ? '...' : isPublic ? '🔗 مشارك — انسخ الرابط' : '🔗 مشاركة'}
           </button>
 
-          {/* Share link copy (if already public) */}
-          {isPublic && weekMeta?.share_token && (
-            <button
-              onClick={async () => {
-                const url = `${window.location.origin}/planner/shared/${weekMeta.share_token}`
-                await navigator.clipboard.writeText(url).catch(() => {})
-                setShareToast('تم نسخ الرابط!')
-                setTimeout(() => setShareToast(null), 3000)
-              }}
-              className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-medium transition-all"
-              style={{ background: '#f0fdf4', color: '#15803d', border: '1px solid #bbf7d0' }}
-            >
-              📋 نسخ الرابط
-            </button>
-          )}
         </div>
       </div>
 
